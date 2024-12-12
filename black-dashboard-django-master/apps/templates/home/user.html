@@ -1,0 +1,162 @@
+{% extends "layouts/base.html" %} {% block title %} User Profile {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+{% load i18n %}
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">{% translate "Edit Profile" %}</h5>
+        </div>
+        <div class="card-body">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>{% translate "Add Company"  %}</h6>
+            </div>
+            <div class="card-body">
+              <form id="addCompanyForm">
+                <div class="mb-3">
+                  <label class="form-label">{% translate "Company Name" %}</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">{% translate "Location" %}</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="location"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  {% translate "Add Company" %}
+                </button>
+              </form>
+
+              {% comment %} <div class="col-12 col-xl-6">
+                <div class="card mb-4">
+                  <div class="card-header pb-0">
+                    <h6>Profile List</h6>
+                  </div>
+                  <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                      <table class="table align-items-center mb-0">
+                        <thead>
+                          <tr>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for profile in user_profiles %}
+
+                          Debug: {{ profile.is_active }}
+                          <tr>
+                            <td>{{ profile.company.name }}</td>
+                            <td>{{ profile.company.location }}</td>
+                            <td>
+                              {% if profile.is_active %}
+                              <span class="badge badge-sm bg-gradient-success"
+                                >Active</span
+                              >
+                              {% else %}
+                              <span class="badge badge-sm bg-gradient-secondary"
+                                >Inactive</span
+                              >
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if not profile.is_active %}
+                              <button
+                                class="btn btn-sm btn-primary activate-profile"
+                                data-profile-id="{{ profile.id }}"
+                              >
+                                Activate
+                              </button>
+                              {% endif %}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div> {% endcomment %}
+
+              <div class="language-switcher">
+                <form action="{% url 'switch_language' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <select class="form-control" name="language" onchange="this.form.submit()" defaultValue={{ language }}>
+                        <option value="en" {% if language == 'en' %}selected{% endif %}>English</option>
+                        <option value="es" {% if language == 'es' %}selected{% endif %}>Español</option>
+                    </select>
+                </form>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock content %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}
+    
+    <!-- <script>
+      document.getElementById('addCompanyForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+          
+          console.log(formData);
+          
+          fetch('{% url "add_company" %}', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                  'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.status === 'success') {
+                  window.location.reload();
+              }
+          });
+      });
+      
+      document.querySelectorAll('.activate-profile').forEach(button => {
+          button.addEventListener('click', function() {
+              const profileId = this.dataset.profileId;
+              
+              fetch(`/activate-profile/${profileId}/`, {
+                  method: 'POST',
+                  headers: {
+                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                  }
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      window.location.reload();
+                  }
+              });
+          });
+      });
+      </script> -->
+    
+    {% endblock javascripts %}
+  </div>
+</div>

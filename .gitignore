@@ -1,0 +1,18 @@
+# Byte-compiled files
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# Cache directories
+**/__pycache__/
+**/_pycache_/
+
+# Application specific cache
+black-dashboard-django-master/apps/authentication/_pycache_/
+black-dashboard-django-master/apps/authenticatio/home/_pycache_/
+black-dashboard-django-master/core/_pycache_/
+black-dashboard-django-master/apps/_pycache_/
+
+

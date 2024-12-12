@@ -1,0 +1,49 @@
+
+    <div class="sidebar">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+      -->
+      {% load i18n %}
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="javascript:void(0)" class="simple-text logo-mini">
+                    CT
+                </a>
+                <a href="javascript:void(0)" class="simple-text logo-normal">
+                    Creative Tim
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="{% if 'index' in segment %} active {% endif %} ">
+                    <a href="/">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>{% translate "Dashboard" %}</p>
+                    </a>
+                </li>
+                <li class="{% if 'icons' in segment %} active {% endif %}">
+                    <a href="/icons.html">
+                        <i class="tim-icons icon-atom"></i>
+                        <p>{% translate "Icons" %}</p>
+                    </a>
+                </li>
+                <li class="{% if 'map' in segment %} active {% endif %}">
+                    <a href="/map.html">
+                        <i class="tim-icons icon-pin"></i>
+                        <p>{% translate "Maps" %}</p>
+                    </a>
+                </li>
+                <li class="{% if 'notifications' in segment %} active {% endif %}">
+                    <a href="/notifications.html">
+                        <i class="tim-icons icon-bell-55"></i>
+                        <p>{% translate "Notifications" %}</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">
+                        <i class="tim-icons icon-button-power"></i>
+                        <p>{% translate "Logout" %}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
